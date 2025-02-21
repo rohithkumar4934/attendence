@@ -4,7 +4,7 @@ import json
 import os
 
 # Read the service account key from GitHub Secrets
-service_account_info = json.loads(os.getenv("FIREBASE_SERVICE_ACCOUNT"))
+service_account_info = json.loads(os.getenv("FIREBASE_KEY"))
 
 # Initialize Firebase with credentials
 cred = credentials.Certificate(service_account_info)
