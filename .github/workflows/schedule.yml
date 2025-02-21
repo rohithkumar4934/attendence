@@ -1,0 +1,25 @@
+name: Update Firestore Attendance
+
+on:
+  schedule:
+    - cron: '31 10 * * *'  # Runs at 6:30 AM IST (1:30 AM UTC)
+
+jobs:
+  update_attendance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install firebase-admin
+
+      - name: Run Firestore update script
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_KEY }}
+        run: python update_attendance.py
