@@ -1,8 +1,13 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import json
+import os
 
-# Initialize Firebase with service account JSON
-cred = credentials.Certificate("serviceAccountKey.json")  # 🔹 Your Firebase JSON key
+# Read the service account key from GitHub Secrets
+service_account_info = json.loads(os.getenv("FIREBASE_SERVICE_ACCOUNT"))
+
+# Initialize Firebase with credentials
+cred = credentials.Certificate(service_account_info)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
